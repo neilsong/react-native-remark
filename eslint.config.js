@@ -30,4 +30,7 @@ export default defineConfig([
       "react/react-in-jsx-scope": "off",
     },
   },
+  {
+    ignores: ["dist/**/*"],
+  },
 ]);
