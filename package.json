@@ -9,6 +9,10 @@
     "lint": "eslint . --no-warn-ignored",
     "lint:fix": "eslint . --fix"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "keywords": [
     "react-native",
     "remark",
