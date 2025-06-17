@@ -1,15 +1,15 @@
-import { Paragraph } from "mdast";
+import { Delete } from "mdast";
 import { RendererArgs } from "./renderers";
 import { ReactNode } from "react";
 import { Text } from "react-native";
 
-export const paragraph = ({
+export const deleteRenderer = ({
   node,
   renderers,
   index,
-}: RendererArgs<Paragraph>): ReactNode => {
+}: RendererArgs<Delete>): ReactNode => {
   return (
-    <Text key={index}>
+    <Text key={index} style={{ textDecorationLine: "line-through" }}>
       {node.children.map((child, idx) =>
         renderers.phrasingContent({
           node: child,

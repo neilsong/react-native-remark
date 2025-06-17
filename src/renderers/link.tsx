@@ -1,19 +1,19 @@
-import { Paragraph } from "mdast";
+import { Link } from "mdast";
 import { RendererArgs } from "./renderers";
 import { ReactNode } from "react";
 import { Text } from "react-native";
 
-export const paragraph = ({
+export const link = ({
   node,
   renderers,
   index,
-}: RendererArgs<Paragraph>): ReactNode => {
+}: RendererArgs<Link>): ReactNode => {
   return (
-    <Text key={index}>
-      {node.children.map((child, idx) =>
+    <Text key={index} style={{ color: "#007AFF" }}>
+      {node.children.map((child, index) =>
         renderers.phrasingContent({
           node: child,
-          index: idx,
+          index,
           parent: node,
           renderers,
         }),

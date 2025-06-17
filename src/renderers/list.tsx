@@ -1,23 +1,23 @@
-import { Paragraph } from "mdast";
+import { List } from "mdast";
 import { RendererArgs } from "./renderers";
 import { ReactNode } from "react";
-import { Text } from "react-native";
+import { View } from "react-native";
 
-export const paragraph = ({
+export const list = ({
   node,
   renderers,
   index,
-}: RendererArgs<Paragraph>): ReactNode => {
+}: RendererArgs<List>): ReactNode => {
   return (
-    <Text key={index}>
+    <View key={index} style={{ gap: 5 }}>
       {node.children.map((child, idx) =>
-        renderers.phrasingContent({
+        renderers.listItem({
           node: child,
           index: idx,
           parent: node,
           renderers,
         }),
       )}
-    </Text>
+    </View>
   );
 };
