@@ -14,15 +14,23 @@ import {
   List,
   ListItem,
   Link,
+  Image,
   ThematicBreak,
   Blockquote,
   Code,
+  Break,
+  Html,
+  Yaml,
+  Definition,
+  ImageReference,
+  LinkReference,
 } from "mdast";
 import { ReactNode } from "react";
 
 export type RendererArgs<This extends Node> = {
   node: This;
   renderers: Renderers;
+  definitions: Record<string, Definition>;
   parent?: Node;
   index?: number;
 };
@@ -32,6 +40,7 @@ export type RenderFunc<This extends Node> = (
 ) => ReactNode;
 
 export interface Renderers {
+  break: RenderFunc<Break>;
   blockContent: RenderFunc<BlockContent>;
   blockquote: RenderFunc<Blockquote>;
   code: RenderFunc<Code>;
@@ -39,14 +48,19 @@ export interface Renderers {
   delete: RenderFunc<Delete>;
   emphasis: RenderFunc<Emphasis>;
   heading: RenderFunc<Heading>;
+  html: RenderFunc<Html>;
   inlineCode: RenderFunc<InlineCode>;
+  linkReference: RenderFunc<LinkReference>;
   link: RenderFunc<Link>;
   list: RenderFunc<List>;
   listItem: RenderFunc<ListItem>;
+  imageReference: RenderFunc<ImageReference>;
+  image: RenderFunc<Image>;
   paragraph: RenderFunc<Paragraph>;
   phrasingContent: RenderFunc<PhrasingContent>;
   rootContent: RenderFunc<RootContent>;
   strong: RenderFunc<Strong>;
   text: RenderFunc<Text>;
   thematicBreak: RenderFunc<ThematicBreak>;
+  yaml: RenderFunc<Yaml>;
 }

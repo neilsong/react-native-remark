@@ -11,7 +11,7 @@ export const rootContent = ({
     case "blockquote":
       return renderers.blockquote({ node, renderers, ...args });
     case "break":
-      return null;
+      return renderers.break({ node, renderers, ...args });
     case "code":
       return renderers.code({ node, renderers, ...args });
     case "definition":
@@ -27,17 +27,17 @@ export const rootContent = ({
     case "heading":
       return renderers.heading({ node, renderers, ...args });
     case "html":
-      return null;
+      return renderers.html({ node, renderers, ...args });
     case "image":
-      return null;
+      return renderers.image({ node, renderers, ...args });
     case "imageReference":
-      return null;
+      return renderers.imageReference({ node, renderers, ...args });
     case "inlineCode":
       return renderers.inlineCode({ node, renderers, ...args });
     case "link":
       return renderers.link({ node, renderers, ...args });
     case "linkReference":
-      return null;
+      return renderers.linkReference({ node, renderers, ...args });
     case "list":
       return renderers.list({ node, renderers, ...args });
     case "listItem":
@@ -57,7 +57,7 @@ export const rootContent = ({
     case "thematicBreak":
       return renderers.thematicBreak({ node, renderers, ...args });
     case "yaml":
-      return null;
+      return renderers.yaml({ node, renderers, ...args });
     default:
       // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-case-declarations
       const _: never = node;

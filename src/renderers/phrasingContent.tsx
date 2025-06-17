@@ -9,7 +9,7 @@ export const phrasingContent = ({
 }: RendererArgs<PhrasingContent>): ReactNode => {
   switch (node.type) {
     case "break":
-      return null;
+      return renderers.break({ node, renderers, ...args });
     case "delete":
       return renderers.delete({ node, renderers, ...args });
     case "emphasis":
@@ -17,17 +17,17 @@ export const phrasingContent = ({
     case "footnoteReference":
       return null;
     case "html":
-      return null;
+      return renderers.html({ node, renderers, ...args });
     case "image":
-      return null;
+      return renderers.image({ node, renderers, ...args });
     case "imageReference":
-      return null;
+      return renderers.imageReference({ node, renderers, ...args });
     case "inlineCode":
       return renderers.inlineCode({ node, renderers, ...args });
     case "link":
       return renderers.link({ node, renderers, ...args });
     case "linkReference":
-      return null;
+      return renderers.linkReference({ node, renderers, ...args });
     case "strong":
       return renderers.strong({ node, renderers, ...args });
     case "text":
