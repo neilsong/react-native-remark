@@ -1,12 +1,12 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createStaticNavigation } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { Linking, ScrollView } from "react-native";
 import { Markdown } from "react-native-remark";
 
 const URL =
-  "https://raw.githubusercontent.com/remarkjs/react-markdown/refs/heads/main/readme.md";
+  "https://raw.githubusercontent.com/nodejs/node/refs/heads/main/README.md";
 
 const HomeScreen = () => {
   const [markdown, setMarkdown] = useState("");

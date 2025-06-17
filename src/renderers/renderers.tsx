@@ -1,28 +1,28 @@
 import {
-  Node,
-  RootContent,
-  PhrasingContent,
-  Paragraph,
-  Text,
-  Strong,
+  BlockContent,
+  Blockquote,
+  Break,
+  Code,
+  DefinitionContent,
   Delete,
   Emphasis,
   Heading,
+  Html,
+  Image,
+  ImageReference,
   InlineCode,
-  BlockContent,
-  DefinitionContent,
+  Link,
+  LinkReference,
   List,
   ListItem,
-  Link,
-  Image,
+  Node,
+  Paragraph,
+  PhrasingContent,
+  RootContent,
+  Strong,
+  Text,
   ThematicBreak,
-  Blockquote,
-  Code,
-  Break,
-  Html,
   Yaml,
-  ImageReference,
-  LinkReference,
 } from "mdast";
 import { ReactNode } from "react";
 
@@ -37,22 +37,22 @@ export type RenderFunc<This extends Node> = (
 ) => ReactNode;
 
 export interface Renderers {
-  break: RenderFunc<Break>;
   blockContent: RenderFunc<BlockContent>;
   blockquote: RenderFunc<Blockquote>;
+  break: RenderFunc<Break>;
   code: RenderFunc<Code>;
   definitionContent: RenderFunc<DefinitionContent>;
   delete: RenderFunc<Delete>;
   emphasis: RenderFunc<Emphasis>;
   heading: RenderFunc<Heading>;
   html: RenderFunc<Html>;
+  image: RenderFunc<Image>;
+  imageReference: RenderFunc<ImageReference>;
   inlineCode: RenderFunc<InlineCode>;
-  linkReference: RenderFunc<LinkReference>;
   link: RenderFunc<Link>;
+  linkReference: RenderFunc<LinkReference>;
   list: RenderFunc<List>;
   listItem: RenderFunc<ListItem>;
-  imageReference: RenderFunc<ImageReference>;
-  image: RenderFunc<Image>;
   paragraph: RenderFunc<Paragraph>;
   phrasingContent: RenderFunc<PhrasingContent>;
   rootContent: RenderFunc<RootContent>;
