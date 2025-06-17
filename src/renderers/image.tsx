@@ -1,4 +1,4 @@
-import { Image, ImageReference } from "mdast";
+import { ImageReference } from "mdast";
 import { RendererArgs } from "./renderers";
 import { ReactNode } from "react";
 
@@ -13,10 +13,6 @@ export const imageReference = ({
   return null;
 };
 
-export const image = ({
-  node,
-  renderers,
-  definitions,
-}: RendererArgs<Image>): ReactNode => {
+export const image = (): ReactNode => {
   return null;
 };

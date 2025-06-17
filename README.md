@@ -4,14 +4,8 @@ A flexible React Native component for rendering Markdown content, with full supp
 
 ## Features
 
-- 📄 **Render Markdown in React Native**  
-  Display Markdown content seamlessly in your React Native apps.
-- 🚀 **GitHub Flavored Markdown (GFM) Support**  
-  Enjoy tables, task lists, strikethrough, and more.
-- 🖼️ **Rich Content Handling**  
-  Supports links, images, code blocks, blockquotes, and other common Markdown elements.
-- 🛠️ **Customizable Renderer System**  
-  Easily override or extend how Markdown elements are rendered.
+- 📄 Render Markdown in React Native
+- 🚀 GitHub Flavored Markdown (GFM) Support
 
 ## Installation
 
