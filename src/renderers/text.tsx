@@ -4,7 +4,8 @@ import { Text } from "react-native";
 
 import { RendererArgs } from "./renderers";
 
-export const text = ({ node, index }: RendererArgs<MdText>): ReactNode => {
+export const TextRenderer = ({ node }: RendererArgs<MdText>): ReactNode => {
   const value = (node.value || "").replace(/\n/g, " ");
-  return <Text key={index}>{value}</Text>;
+  if (!value) return null;
+  return <Text>{value}</Text>;
 };
