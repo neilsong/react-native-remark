@@ -1,16 +1,23 @@
 import { BlockContent, DefinitionContent, List, ListItem } from "mdast";
 import { Fragment, ReactNode } from "react";
-import { Text, View } from "react-native";
+import { Text, View, useColorScheme } from "react-native";
 
 import { useMarkdownContext } from "../context";
+import { mergeStyles, themedStyle } from "../themes/themes";
 import { RendererArgs } from "./renderers";
 
 export const ListRenderer = ({ node }: RendererArgs<List>): ReactNode => {
-  const { renderers } = useMarkdownContext();
+  const colorScheme = useColorScheme();
+  const { renderers, theme } = useMarkdownContext();
   const { ListItemRenderer } = renderers;
 
+  const style = mergeStyles(
+    themedStyle(theme, colorScheme, "DefaultContainerStyle"),
+    themedStyle(theme, colorScheme, "ListStyle"),
+  );
+
   return (
-    <View style={{ gap: 5 }}>
+    <View style={style}>
       {node.children.map((child, idx) => (
         <ListItemRenderer node={child} key={idx} index={idx} parent={node} />
       ))}
@@ -23,19 +30,29 @@ export const ListItemRenderer = ({
   index,
   parent,
 }: RendererArgs<ListItem>): ReactNode => {
-  const { renderers } = useMarkdownContext();
+  const colorScheme = useColorScheme();
+  const { renderers, theme } = useMarkdownContext();
   const { BlockContentRenderer, DefinitionContentRenderer } = renderers;
 
+  const markerStyle = mergeStyles(
+    themedStyle(theme, colorScheme, "ListItemMarkerStyle"),
+  );
+  const containerStyle = mergeStyles(
+    themedStyle(theme, colorScheme, "DefaultContainerStyle"),
+    themedStyle(theme, colorScheme, "ListItemContainerStyle"),
+  );
+
   const list = parent?.type === "list" ? (parent as List) : null;
-  const itemId = (list?.start ?? 1) + (index ?? 0);
+  const itemNumber = (list?.start ?? 1) + (index ?? 0);
+
   return (
     <View style={{ flexDirection: "row" }}>
       {list?.ordered ? (
-        <Text style={{ marginRight: 5 }}>{itemId}.</Text>
+        <Text style={markerStyle}>{itemNumber}.</Text>
       ) : (
-        <Text style={{ marginRight: 5 }}>•</Text>
+        <Text style={markerStyle}>•</Text>
       )}
-      <View style={{ flex: 1 }}>
+      <View style={containerStyle}>
         {node.children.map((child, idx) => (
           <Fragment key={idx}>
             <BlockContentRenderer
