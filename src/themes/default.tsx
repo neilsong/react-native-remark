@@ -4,10 +4,11 @@ import { Theme } from "./themes";
 
 export const defaultTheme: Theme = {
   global: {
-    DefaultContainerStyle: {
+    container: {
       gap: 10,
     },
-    BlockquoteStyle: {
+    borderColor: "#eeeeee",
+    blockquote: {
       borderLeftWidth: 3,
       borderLeftColor: "#444444",
       backgroundColor: "#f5f5f5",
@@ -16,48 +17,43 @@ export const defaultTheme: Theme = {
       paddingLeft: 10,
       gap: 5,
     },
-    DeleteStyle: {
+    delete: {
       textDecorationLine: "line-through",
     },
-    EmphasisStyle: {
+    emphasis: {
       fontStyle: "italic",
     },
-    HeadingStyle: (level: number) => {
+    heading: (level: number) => {
       const fontSize = 32 - level * 2;
       const fontWeight = level <= 3 ? "bold" : "semibold";
       const marginVertical = level <= 3 ? 4 : 2;
       return { fontSize, fontWeight, marginVertical };
     },
-    InlineCodeStyle: {
+    inlineCode: {
       fontFamily: Platform.select({ ios: "Menlo", android: "monospace" }),
       backgroundColor: "#f5f5f5",
     },
-    LinkReferenceStyle: {
+    linkReference: {
       color: "#007AFF",
     },
-    LinkStyle: {
+    link: {
       color: "#007AFF",
     },
-    ListStyle: {
+    list: {
       gap: 5,
     },
-    ListItemMarkerStyle: {
-      marginRight: 5,
-      fontSize: 16,
-      lineHeight: 24,
-    },
-    ListItemContainerStyle: {
+    listItem: {
       flex: 1,
       gap: 5,
     },
-    ParagraphStyle: {
+    paragraph: {
       fontSize: 16,
       lineHeight: 24,
     },
-    StrongStyle: {
+    strong: {
       fontWeight: "bold",
     },
-    ThematicBreakStyle: {
+    thematicBreak: {
       marginVertical: 10,
       height: 1,
       backgroundColor: "#eeeeee",

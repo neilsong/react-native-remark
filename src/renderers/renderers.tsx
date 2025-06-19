@@ -20,6 +20,9 @@ import {
   PhrasingContent,
   RootContent,
   Strong,
+  Table,
+  TableCell,
+  TableRow,
   Text,
   ThematicBreak,
   Yaml,
@@ -32,8 +35,8 @@ export type RendererArgs<This extends Node> = {
   index?: number;
 };
 
-export type RenderFunc<This extends Node> = (
-  args: RendererArgs<This>,
+export type RenderFunc<This extends Node, T = object> = (
+  args: RendererArgs<This> & T,
 ) => ReactNode;
 
 export interface Renderers {
@@ -57,6 +60,9 @@ export interface Renderers {
   PhrasingContentRenderer: RenderFunc<PhrasingContent>;
   RootContentRenderer: RenderFunc<RootContent>;
   StrongRenderer: RenderFunc<Strong>;
+  TableRenderer: RenderFunc<Table>;
+  TableCellRenderer: RenderFunc<TableCell, { rowIndex: number }>;
+  TableRowRenderer: RenderFunc<TableRow>;
   TextRenderer: RenderFunc<Text>;
   ThematicBreakRenderer: RenderFunc<ThematicBreak>;
   YamlRenderer: RenderFunc<Yaml>;

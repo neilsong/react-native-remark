@@ -1,22 +1,23 @@
-import { TextStyle, ViewStyle } from "react-native";
+import { ColorValue, TextStyle, ViewStyle } from "react-native";
 
 export interface Styles {
-  DefaultContainerStyle: ViewStyle;
-  BlockquoteStyle: ViewStyle;
-  BreakStyle: ViewStyle;
-  DeleteStyle: TextStyle;
-  EmphasisStyle: TextStyle;
-  HeadingStyle: (level: number) => TextStyle;
-  InlineCodeStyle: TextStyle;
-  LinkReferenceStyle: TextStyle;
-  LinkStyle: TextStyle;
-  ListStyle: ViewStyle;
-  ListItemMarkerStyle: TextStyle;
-  ListItemContainerStyle: ViewStyle;
-  ParagraphStyle: TextStyle;
-  StrongStyle: TextStyle;
-  TextStyle: TextStyle;
-  ThematicBreakStyle: ViewStyle;
+  container: ViewStyle;
+  borderColor: ColorValue;
+  blockquote: ViewStyle;
+  break: ViewStyle;
+  delete: TextStyle;
+  emphasis: TextStyle;
+  heading: (level: number) => TextStyle;
+  inlineCode: TextStyle;
+  linkReference: TextStyle;
+  link: TextStyle;
+  list: ViewStyle;
+  listItem: ViewStyle;
+  paragraph: TextStyle;
+  strong: TextStyle;
+  tableCell: TextStyle;
+  text: TextStyle;
+  thematicBreak: ViewStyle;
 }
 
 export interface Theme {

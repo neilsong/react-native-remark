@@ -10,7 +10,7 @@ export const ListRenderer = ({ node }: RendererArgs<List>): ReactNode => {
   const { renderers, styles } = useMarkdownContext();
   const { ListItemRenderer } = renderers;
 
-  const style = mergeStyles(styles.DefaultContainerStyle, styles.ListStyle);
+  const style = mergeStyles(styles.container, styles.list);
 
   return (
     <View style={style}>
@@ -29,11 +29,9 @@ export const ListItemRenderer = ({
   const { renderers, styles } = useMarkdownContext();
   const { BlockContentRenderer, DefinitionContentRenderer } = renderers;
 
-  const markerStyle = mergeStyles(styles.ListItemMarkerStyle);
-  const containerStyle = mergeStyles(
-    styles.DefaultContainerStyle,
-    styles.ListItemContainerStyle,
-  );
+  const markerStyle = mergeStyles(styles.paragraph, {
+    marginRight: 5,
+  });
 
   const list = parent?.type === "list" ? (parent as List) : null;
   const itemNumber = (list?.start ?? 1) + (index ?? 0);
@@ -45,7 +43,7 @@ export const ListItemRenderer = ({
       ) : (
         <Text style={markerStyle}>•</Text>
       )}
-      <View style={containerStyle}>
+      <View style={styles.listItem}>
         {node.children.map((child, idx) => (
           <Fragment key={idx}>
             <BlockContentRenderer
