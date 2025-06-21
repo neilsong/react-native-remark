@@ -1,21 +1,60 @@
-import { Platform } from "react-native";
+import { ColorValue, Platform, TextStyle } from "react-native";
 
 import { Theme } from "./themes";
 
+const fontFamily = Platform.select({ ios: "Menlo", android: "monospace" });
+const light = {
+  primaryColor: "#000000",
+  darkColor: "#444444",
+  linkColor: "#007AFF",
+  bgColor: "#eeeeee",
+  bgColor0: "#f9f9f9",
+  bgColor1: "#f5f5f5",
+};
+const dark = {
+  primaryColor: "#ffffff",
+  darkColor: "#bbbbbb",
+  linkColor: "#007AFF",
+  bgColor: "#222222",
+  bgColor0: "#070707",
+  bgColor1: "#0b0b0b",
+};
+const headingHandler = (color: ColorValue) => {
+  return (level: number): TextStyle => {
+    const fontSize = 28 - level * 2;
+    const fontWeight = level <= 3 ? "bold" : "500";
+    const marginVertical = level <= 3 ? 4 : 2;
+    return { fontSize, fontWeight, marginVertical, color };
+  };
+};
+
 export const defaultTheme: Theme = {
   global: {
-    container: {
-      gap: 10,
-    },
-    borderColor: "#eeeeee",
     blockquote: {
       borderLeftWidth: 3,
-      borderLeftColor: "#444444",
-      backgroundColor: "#f5f5f5",
+      borderLeftColor: light.darkColor,
+      backgroundColor: light.bgColor1,
       paddingTop: 5,
       paddingBottom: 5,
       paddingLeft: 10,
+      paddingRight: 5,
       gap: 5,
+    },
+    borderColor: light.bgColor,
+    break: {},
+    codeBlock: {
+      headerBackgroundColor: light.bgColor1,
+      contentBackgroundColor: light.bgColor0,
+      headerTextStyle: {
+        fontSize: 14,
+      },
+      contentTextStyle: {
+        fontFamily: fontFamily,
+        fontSize: 14,
+      },
+    },
+    container: {
+      gap: 10,
     },
     delete: {
       textDecorationLine: "line-through",
@@ -24,42 +63,26 @@ export const defaultTheme: Theme = {
       fontStyle: "italic",
     },
     footnoteDefinition: {
-      color: "#444444",
+      color: light.darkColor,
     },
     footnoteReference: {
       fontStyle: "italic",
       fontSize: 10,
-      color: "#444444",
+      color: light.darkColor,
     },
-    heading: (level: number) => {
-      const fontSize = 28 - level * 2;
-      const fontWeight = level <= 3 ? "bold" : "semibold";
-      const marginVertical = level <= 3 ? 4 : 2;
-      return { fontSize, fontWeight, marginVertical };
-    },
-    inlineCode: {
-      fontFamily: Platform.select({ ios: "Menlo", android: "monospace" }),
-      backgroundColor: "#f5f5f5",
-    },
+    heading: headingHandler(light.primaryColor),
     image: {
       borderRadius: 5,
     },
-    codeBlock: {
-      headerBackgroundColor: "#f5f5f5",
-      contentBackgroundColor: "#fcfcfc",
-      headerTextStyle: {
-        fontSize: 14,
-      },
-      contentTextStyle: {
-        fontFamily: Platform.select({ ios: "Menlo", android: "monospace" }),
-        fontSize: 14,
-      },
-    },
-    linkReference: {
-      color: "#007AFF",
+    inlineCode: {
+      fontFamily: fontFamily,
+      backgroundColor: light.bgColor0,
     },
     link: {
-      color: "#007AFF",
+      color: light.linkColor,
+    },
+    linkReference: {
+      color: light.linkColor,
     },
     list: {
       gap: 5,
@@ -71,20 +94,63 @@ export const defaultTheme: Theme = {
     paragraph: {
       fontSize: 16,
       lineHeight: 24,
+      color: light.primaryColor,
+    },
+    strong: {
+      fontWeight: "bold",
     },
     tableCell: {
       fontSize: 14,
       lineHeight: 20,
     },
-    strong: {
-      fontWeight: "bold",
-    },
+    text: {},
     thematicBreak: {
       marginVertical: 10,
       height: 1,
-      backgroundColor: "#eeeeee",
+      backgroundColor: light.bgColor,
     },
   },
   light: {},
-  dark: {},
+  dark: {
+    blockquote: {
+      borderLeftColor: dark.darkColor,
+      backgroundColor: dark.bgColor1,
+    },
+    borderColor: dark.bgColor,
+    codeBlock: {
+      headerBackgroundColor: dark.bgColor1,
+      contentBackgroundColor: dark.bgColor0,
+      headerTextStyle: {
+        color: dark.primaryColor,
+      },
+      contentTextStyle: {
+        color: dark.primaryColor,
+      },
+    },
+    footnoteDefinition: {
+      color: dark.darkColor,
+    },
+    footnoteReference: {
+      color: dark.darkColor,
+    },
+    heading: headingHandler(dark.primaryColor),
+    inlineCode: {
+      backgroundColor: dark.bgColor0,
+    },
+    link: {
+      color: dark.linkColor,
+    },
+    linkReference: {
+      color: dark.linkColor,
+    },
+    paragraph: {
+      color: dark.primaryColor,
+    },
+    tableCell: {
+      color: dark.primaryColor,
+    },
+    thematicBreak: {
+      backgroundColor: dark.bgColor,
+    },
+  },
 };

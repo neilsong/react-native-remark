@@ -9,24 +9,25 @@ import {
   TouchableOpacity,
   View,
   ViewProps,
+  useColorScheme,
 } from "react-native";
 import SyntaxHighlighter from "react-syntax-highlighter";
-import { atomOneLight } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import {
+  atomOneDark,
+  atomOneLight,
+} from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 import { useMarkdownContext } from "../context";
+import { mergeStyles } from "../themes/themes";
 import { RendererArgs } from "./renderers";
 
-const theme = atomOneLight;
-
 const generateNativeStyles = (
+  theme: typeof atomOneLight | typeof atomOneDark,
   node: rendererNode,
   themedStyle?: TextStyle,
 ): TextStyle => {
   const classNames = node.properties?.className || [];
-  const style: TextStyle = {
-    fontFamily: themedStyle?.fontFamily,
-    fontSize: themedStyle?.fontSize,
-  };
+  const style: TextStyle = mergeStyles(themedStyle, {});
   for (const className of classNames) {
     if (!className || typeof className !== "string") {
       continue;
@@ -56,9 +57,15 @@ const TextRenderer = ({ node }: NativeRendererProps) => {
 };
 
 const ElementRenderer = ({ node }: NativeRendererProps) => {
+  const colorScheme = useColorScheme();
+  const theme = colorScheme === "dark" ? atomOneDark : atomOneLight;
   const { styles } = useMarkdownContext();
   const { children } = node;
-  const style = generateNativeStyles(node, styles.codeBlock?.contentTextStyle);
+  const style = generateNativeStyles(
+    theme,
+    node,
+    styles.codeBlock?.contentTextStyle,
+  );
   const child = children?.map((child, idx) => {
     return <NativeRenderer key={idx} node={child} />;
   });
@@ -136,6 +143,8 @@ export const CodeRenderer = ({ node }: RendererArgs<Code>): ReactNode => {
         style={{
           flexDirection: "row",
           borderBottomWidth: 1,
+          borderTopLeftRadius: 5,
+          borderTopRightRadius: 5,
           borderColor: styles.borderColor,
           backgroundColor: styles.codeBlock?.headerBackgroundColor,
           justifyContent: "space-between",
@@ -173,6 +182,8 @@ export const CodeRenderer = ({ node }: RendererArgs<Code>): ReactNode => {
       <View
         style={{
           paddingHorizontal: 10,
+          borderBottomLeftRadius: 5,
+          borderBottomRightRadius: 5,
           backgroundColor: styles.codeBlock?.contentBackgroundColor,
         }}
       >

@@ -9,13 +9,14 @@ import {
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
   Button,
   Linking,
   ScrollView,
+  useColorScheme,
 } from "react-native";
 
 const BASE_URL =
@@ -23,14 +24,19 @@ const BASE_URL =
 const URL = `${BASE_URL}/01_markdown_basics.md`;
 
 const HomeScreen = () => {
+  const colorScheme = useColorScheme();
   const navigation = useNavigation();
   const { showActionSheetWithOptions } = useActionSheet();
   const [url, setUrl] = useState(URL);
   const [markdown, setMarkdown] = useState("");
   const [loading, setLoading] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     navigation.setOptions({
+      headerTintColor: colorScheme === "dark" ? "white" : "black",
+      headerStyle: {
+        backgroundColor: colorScheme === "dark" ? "black" : "white",
+      },
       headerRight: () => (
         <Button
           title="Load"
@@ -98,7 +104,7 @@ const HomeScreen = () => {
         />
       ),
     });
-  }, [navigation, showActionSheetWithOptions, setUrl]);
+  }, [colorScheme, navigation, showActionSheetWithOptions, setUrl]);
 
   useEffect(() => {
     setLoading(true);
@@ -109,7 +115,13 @@ const HomeScreen = () => {
   }, [url]);
 
   return (
-    <ScrollView style={{ flex: 1, padding: 8, backgroundColor: "white" }}>
+    <ScrollView
+      style={{
+        flex: 1,
+        padding: 8,
+        backgroundColor: colorScheme === "dark" ? "black" : "white",
+      }}
+    >
       <StatusBar style="auto" />
       {loading ? (
         <ActivityIndicator />

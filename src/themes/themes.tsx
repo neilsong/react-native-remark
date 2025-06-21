@@ -8,20 +8,20 @@ export type CodeBlockStyle = {
 };
 
 export interface Styles {
-  container: ViewStyle;
-  borderColor: ColorValue;
   blockquote: ViewStyle;
+  borderColor: ColorValue;
   break: ViewStyle;
+  codeBlock: CodeBlockStyle;
+  container: ViewStyle;
   delete: TextStyle;
   emphasis: TextStyle;
   footnoteDefinition: TextStyle;
   footnoteReference: TextStyle;
   heading: (level: number) => TextStyle;
-  inlineCode: TextStyle;
   image: ImageStyle;
-  codeBlock: CodeBlockStyle;
-  linkReference: TextStyle;
+  inlineCode: TextStyle;
   link: TextStyle;
+  linkReference: TextStyle;
   list: ViewStyle;
   listItem: ViewStyle;
   paragraph: TextStyle;
@@ -37,10 +37,30 @@ export interface Theme {
   dark?: Partial<Styles>;
 }
 
-export const mergeStyles = <T extends ViewStyle | TextStyle | undefined>(
-  ...styles: T[]
+function isObject<T>(obj: T): obj is T & object {
+  return obj && typeof obj === "object" && !Array.isArray(obj);
+}
+
+export function deepMerge<T>(target: T, source: T): T {
+  const result = { ...target };
+  for (const key in source) {
+    if (isObject(source[key]) && isObject(result[key])) {
+      result[key] = deepMerge(result[key], source[key]);
+    } else {
+      result[key] = source[key];
+    }
+  }
+  return result;
+}
+
+export const mergeStyles = <T extends ViewStyle | TextStyle | CodeBlockStyle>(
+  ...styles: (T | undefined)[]
 ): T => {
-  return styles.reduce((acc, style) => {
-    return { ...acc, ...style };
-  }, {} as T);
+  let result: T = {} as T;
+  for (const style of styles) {
+    if (style) {
+      result = deepMerge(result, style);
+    }
+  }
+  return result;
 };
