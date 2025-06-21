@@ -1,5 +1,12 @@
 import { ColorValue, ImageStyle, TextStyle, ViewStyle } from "react-native";
 
+export type CodeBlockStyle = {
+  headerBackgroundColor?: ColorValue;
+  contentBackgroundColor?: ColorValue;
+  headerTextStyle?: TextStyle;
+  contentTextStyle?: TextStyle;
+};
+
 export interface Styles {
   container: ViewStyle;
   borderColor: ColorValue;
@@ -7,10 +14,12 @@ export interface Styles {
   break: ViewStyle;
   delete: TextStyle;
   emphasis: TextStyle;
+  footnoteDefinition: TextStyle;
+  footnoteReference: TextStyle;
   heading: (level: number) => TextStyle;
   inlineCode: TextStyle;
   image: ImageStyle;
-  codeBlock: TextStyle;
+  codeBlock: CodeBlockStyle;
   linkReference: TextStyle;
   link: TextStyle;
   list: ViewStyle;
