@@ -1,5 +1,5 @@
 import { BlockContent, DefinitionContent, List, ListItem } from "mdast";
-import { Fragment, ReactNode } from "react";
+import { Fragment, ReactNode, useMemo } from "react";
 import { Text, View } from "react-native";
 
 import { useMarkdownContext } from "../context";
@@ -29,20 +29,30 @@ export const ListItemRenderer = ({
   const { renderers, styles } = useMarkdownContext();
   const { BlockContentRenderer, DefinitionContentRenderer } = renderers;
 
-  const markerStyle = mergeStyles(styles.paragraph, {
-    marginRight: 5,
-  });
-
   const list = parent?.type === "list" ? (parent as List) : null;
   const itemNumber = (list?.start ?? 1) + (index ?? 0);
 
+  const markerStyle = useMemo(() => {
+    const defaultStyle = mergeStyles(styles.paragraph, {
+      fontWeight: "500",
+    });
+    const firstItem = node.children[0];
+    if (!firstItem) return defaultStyle;
+    if (firstItem.type === "heading") {
+      return styles.heading?.(firstItem.depth);
+    }
+    return defaultStyle;
+  }, [styles, node]);
+
   return (
     <View style={{ flexDirection: "row" }}>
-      {list?.ordered ? (
-        <Text style={markerStyle}>{itemNumber}.</Text>
-      ) : (
-        <Text style={markerStyle}>•</Text>
-      )}
+      <View style={{ marginRight: 5 }}>
+        {list?.ordered ? (
+          <Text style={markerStyle}>{itemNumber}.</Text>
+        ) : (
+          <Text style={markerStyle}>•</Text>
+        )}
+      </View>
       <View style={styles.listItem}>
         {node.children.map((child, idx) => (
           <Fragment key={idx}>
