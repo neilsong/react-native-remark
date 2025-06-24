@@ -1,5 +1,33 @@
 ![](./docs/hero-banner.png)
 
+<p align="center">
+  <a href="https://github.com/imwithye/react-native-remark/actions/workflows/build.yml">
+    <picture>
+      <img src="https://github.com/imwithye/react-native-remark/actions/workflows/build.yml/badge.svg?branch=main" />
+    </picture>
+  </a>
+  <a href="https://www.npmjs.com/package/react-native-remark">
+    <picture>
+      <img src="https://img.shields.io/npm/v/react-native-remark" />
+    </picture>
+  </a>
+  <a href="https://www.npmjs.com/package/react-native-remark">
+    <picture>
+      <img src="https://img.shields.io/npm/dw/react-native-remark" />
+    </picture>
+  </a>
+  <a href="https://www.npmjs.com/package/react-native-remark">
+    <picture>
+      <img src="https://img.shields.io/npm/types/react-native-remark" />
+    </picture>
+  </a>
+  <a href="https://github.com/imwithye/react-native-remark/blob/main/LICENSE">
+    <picture>
+      <img src="https://img.shields.io/github/license/imwithye/react-native-remark" />
+    </picture>
+  </a>
+</p>
+
 **react-native-remark** provides elegant and powerful Markdown rendering capabilities for React Native applications.
 
 ## Features
@@ -83,4 +111,11 @@ cd example && pnpm i && pnpm run ios
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=imwithye/react-native-remark&type=Date)](https://www.star-history.com/#imwithye/react-native-remark&Date)
+<a href="https://www.star-history.com/#imwithye/react-native-remark&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=imwithye/react-native-remark&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=imwithye/react-native-remark&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=imwithye/react-native-remark&type=Date" width="100%" />
+ </picture>
+</a>
+
