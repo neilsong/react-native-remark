@@ -1,3 +1,5 @@
 import { defaultTheme } from "./default";
+import { serifTheme } from "./serif";
+import { Theme } from "./themes";
 
-export { defaultTheme };
+export { Theme, defaultTheme, serifTheme };

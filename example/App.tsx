@@ -3,6 +3,7 @@ import {
   useActionSheet,
 } from "@expo/react-native-action-sheet";
 import { Markdown } from "@react-native-remark";
+import { themes } from "@react-native-remark";
 import {
   createStaticNavigation,
   useNavigation,
@@ -18,6 +19,8 @@ import {
   ScrollView,
   useColorScheme,
 } from "react-native";
+
+const { defaultTheme } = themes;
 
 const BASE_URL =
   "https://raw.githubusercontent.com/imwithye/react-native-remark/refs/heads/main/markdown";
@@ -112,6 +115,7 @@ const HomeScreen = () => {
       ) : (
         <Markdown
           markdown={markdown}
+          theme={defaultTheme}
           onLinkPress={(url) => Linking.openURL(url)}
         />
       )}
