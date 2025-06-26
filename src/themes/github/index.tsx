@@ -1,11 +1,9 @@
 import { ColorValue, Platform, TextStyle } from "react-native";
 
-import { Theme } from "./themes";
+import { Theme } from "../themes";
+import { HeadingRenderer } from "./heading";
+import { TableCellRenderer, TableRenderer, TableRowRenderer } from "./table";
 
-const fontFamily = Platform.select({
-  ios: "Georgia",
-  android: "serif",
-});
 const monospaceFontFamily = Platform.select({
   ios: "Menlo",
   android: "monospace",
@@ -13,7 +11,7 @@ const monospaceFontFamily = Platform.select({
 
 const light = {
   primaryColor: "#000000",
-  darkColor: "#444444",
+  darkColor: "#d1d9e0",
   linkColor: "#007AFF",
   borderColor: "#eeeeee",
   bgColorLight: "#f9f9f9",
@@ -23,26 +21,25 @@ const dark = {
   primaryColor: "#ffffff",
   darkColor: "#bbbbbb",
   linkColor: "#007AFF",
-  borderColor: "#222222",
-  bgColorLight: "#070707",
+  borderColor: "#3d444d",
+  bgColorLight: "#151b23",
   bgColorHeavy: "#0b0b0b",
 };
 
 const headingHandler = (color: ColorValue) => {
   return (level: number): TextStyle => {
-    const fontSize = 28 - level * 2;
+    const fontSize = 32 - level * 2;
     const fontWeight = level <= 3 ? "bold" : "500";
     const marginVertical = level <= 3 ? 4 : 2;
-    return { fontFamily, fontSize, fontWeight, marginVertical, color };
+    return { fontSize, fontWeight, marginVertical, color };
   };
 };
 
-export const serifTheme: Theme = {
+export const githubTheme: Theme = {
   global: {
     blockquote: {
       borderLeftWidth: 3,
       borderLeftColor: light.darkColor,
-      backgroundColor: light.bgColorHeavy,
       paddingTop: 5,
       paddingBottom: 5,
       paddingLeft: 10,
@@ -55,7 +52,6 @@ export const serifTheme: Theme = {
       headerBackgroundColor: light.bgColorHeavy,
       contentBackgroundColor: light.bgColorLight,
       headerTextStyle: {
-        fontFamily,
         fontSize: 14,
       },
       contentTextStyle: {
@@ -67,15 +63,12 @@ export const serifTheme: Theme = {
       gap: 10,
     },
     delete: {
-      fontFamily,
       textDecorationLine: "line-through",
     },
     emphasis: {
-      fontFamily,
       fontStyle: "italic",
     },
     footnoteReference: {
-      fontFamily,
       fontStyle: "italic",
       fontSize: 10,
       color: light.darkColor,
@@ -89,7 +82,6 @@ export const serifTheme: Theme = {
       backgroundColor: light.bgColorLight,
     },
     link: {
-      fontFamily,
       color: light.linkColor,
     },
     linkReference: {
@@ -103,24 +95,22 @@ export const serifTheme: Theme = {
       gap: 5,
     },
     paragraph: {
-      fontFamily,
       fontSize: 16,
       lineHeight: 24,
       color: light.primaryColor,
     },
     strong: {
-      fontFamily,
       fontWeight: "bold",
     },
     tableCell: {
-      fontFamily,
       fontSize: 14,
       lineHeight: 20,
+      backgroundColor: light.bgColorLight,
     },
     text: {},
     thematicBreak: {
       marginVertical: 10,
-      height: 1,
+      height: 5,
       backgroundColor: light.borderColor,
     },
   },
@@ -159,9 +149,16 @@ export const serifTheme: Theme = {
     },
     tableCell: {
       color: dark.primaryColor,
+      backgroundColor: dark.bgColorLight,
     },
     thematicBreak: {
       backgroundColor: dark.borderColor,
     },
+  },
+  renderers: {
+    HeadingRenderer,
+    TableRenderer,
+    TableRowRenderer,
+    TableCellRenderer,
   },
 };
