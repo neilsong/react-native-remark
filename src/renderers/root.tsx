@@ -4,12 +4,12 @@ import { View } from "react-native";
 import { useMarkdownContext } from "../context";
 import { RendererArgs } from "./renderers";
 
-export const RootRenderer = ({ node }: RendererArgs<Root>) => {
+export const RootRenderer = ({ node, ref }: RendererArgs<Root>) => {
   const { renderers, styles } = useMarkdownContext();
   const { RootContentRenderer } = renderers;
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} ref={ref}>
       {node.children.map((node, index) => (
         <RootContentRenderer
           key={index}

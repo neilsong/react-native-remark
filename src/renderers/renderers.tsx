@@ -31,11 +31,13 @@ import {
   Yaml,
 } from "mdast";
 import { ReactNode } from "react";
+import { View } from "react-native";
 
 export type RendererArgs<This extends Node> = {
   node: This;
   parent?: Node;
   index?: number;
+  ref?: React.RefObject<View>;
 };
 
 export type RenderFunc<This extends Node, T = object> = (
