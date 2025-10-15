@@ -61,7 +61,7 @@ const TableContextProvider = ({
     (index: number, width: number) => {
       setColumnWidths((prev) => {
         const minWidth = Math.max(contentSize.width / columnCount, 64);
-        const maxWidth = 180;
+        const maxWidth = 500;
         const old = prev[index] ?? 0;
         const newWidth = Math.min(
           Math.max(Math.max(old, width), minWidth),
@@ -210,7 +210,6 @@ export const TableCellRenderer = ({
           },
         ]}
         onLayout={onTextLayout}
-        numberOfLines={1}
       >
         {content}
       </Text>
