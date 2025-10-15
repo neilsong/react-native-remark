@@ -37,7 +37,7 @@ export type RendererArgs<This extends Node> = {
   node: This;
   parent?: Node;
   index?: number;
-  ref?: React.RefObject<View>;
+  ref?: React.Ref<View>;
 };
 
 export type RenderFunc<This extends Node, T = object> = (
