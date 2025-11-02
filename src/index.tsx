@@ -1,7 +1,4 @@
-import { useMarkdownContext } from "./context";
-import { Markdown } from "./markdown";
-import { RenderFunc, RendererArgs, Renderers } from "./renderers";
-import { Theme, defaultTheme, githubTheme, serifTheme } from "./themes";
+import { defaultTheme, githubTheme, serifTheme } from "./themes";
 
 export const themes = {
   defaultTheme,
@@ -9,11 +6,7 @@ export const themes = {
   serifTheme,
 };
 
-export {
-  Markdown,
-  useMarkdownContext,
-  Renderers,
-  RenderFunc,
-  RendererArgs,
-  Theme,
-};
+export * from "./markdown";
+export * from "./context";
+export * from "./renderers";
+export * from "./themes/themes";
