@@ -27,6 +27,13 @@
   ],
   "author": "Yiwei Gong",
   "license": "MIT",
+  "engines": {
+    "runtime": {
+      "name": "node",
+      "version": "^22.18.0",
+      "onFail": "download"
+    }
+  },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
     "react-syntax-highlighter": "^15.6.1",
